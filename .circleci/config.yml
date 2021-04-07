@@ -1,0 +1,31 @@
+version: 2.1
+
+executors:
+  base:
+    docker: 
+     - image: cimg/base:stable
+workflows:
+  main:
+    jobs:
+     - build
+     - build_again:
+        requires:
+         - build
+     - one_more_build
+
+jobs: 
+  build:
+    executor: base
+    steps:
+     - checkout
+     - run: echo "Build Step"
+  build_again:
+    executor: base
+    steps:
+     - checkout
+     - run: echo "Build Step"
+  one_more_build:
+    executor: base
+    steps:
+     - checkout
+     - run: echo "Onre More Build Step"
